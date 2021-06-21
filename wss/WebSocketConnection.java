@@ -1,4 +1,4 @@
-package main;
+package wss;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,8 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.xml.bind.DatatypeConverter;
+import java.util.Base64;
 
 public class WebSocketConnection extends Thread {
 
@@ -46,19 +45,22 @@ public class WebSocketConnection extends Thread {
 								.matcher(data);
 						match.find();
 
+						String magicBytes = match.group(1);
+
 						byte[] response = ("HTTP/1.1 101 Switching Protocols\r\n"
 								+ "Connection: Upgrade\r\n"
 								+ "Upgrade: websocket\r\n"
 								+ "Sec-WebSocket-Accept: "
-								+ DatatypeConverter.printBase64Binary(
+								+ Base64.getEncoder().encodeToString(
 										MessageDigest.getInstance("SHA-1")
-												.digest((match.group(1)
+												.digest((magicBytes
 														+ "258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
 																.getBytes(
 																		"UTF-8")))
 								+ "\r\n\r\n").getBytes("UTF-8");
 
 						out.write(response, 0, response.length);
+						out.flush();
 						System.out.println("handshake with "
 								+ socket.getInetAddress() + ":"
 								+ socket.getPort() + " successful");

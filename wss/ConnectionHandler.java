@@ -1,4 +1,4 @@
-package main;
+package wss;
 
 import java.util.Vector;
 

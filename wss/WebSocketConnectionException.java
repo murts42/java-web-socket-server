@@ -1,4 +1,4 @@
-package main;
+package wss;
 
 public class WebSocketConnectionException extends Exception {
 
