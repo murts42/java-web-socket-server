@@ -9,6 +9,12 @@ public class Example {
     public Example() {
         WebSocketConnectionHandler handler = new EchoConnectionHandler();
         WebSocketServer server = new WebSocketServer(handler, 1001); // automatically starts background thread, that listens for new connections
+        try {
+            Thread.sleep(10 * 1000);
+        } catch (InterruptedException e) {
+            // ignore
+        }
+        server.close();
     }
 
     public static void main(String[] args) {
