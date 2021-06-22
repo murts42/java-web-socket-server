@@ -34,8 +34,8 @@ public class WebSocketConnection extends Thread {
 					InputStream in = socket.getInputStream();
 					OutputStream out = socket.getOutputStream();
 
-					Scanner scanner = new Scanner(in, "UTF-8");
-					String data = scanner.useDelimiter("\\r\\n\\r\\n").next();
+					Scanner scanner = new Scanner(in);
+					String data = scanner.useDelimiter("\r\n\r\n").next();
 
 					Matcher get = Pattern.compile("^GET").matcher(data);
 					if (get.find()) {
