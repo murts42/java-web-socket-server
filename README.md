@@ -34,4 +34,4 @@ Then you need to instantiate a `WebSocketServer` with the handler from above. Th
 
 ## Crappiness
 
-This thing basically does not care how the initial handshake from the cleint looks, as long as it starts with `GET`, ends with `\r\n\r\n` and contains the `Sec-WebSocket-Key` header. It also does not support custom protocols and Secure Web Socket (wss://).
+This thing basically does not care how the initial handshake from the client looks, as long as it starts with `GET`, ends with `\r\n\r\n` and contains the `Sec-WebSocket-Key` header. It also does not support custom protocols and Secure Web Socket (wss://).
